@@ -1,18 +1,36 @@
 <h4>Formularios <small> Reactivos </small></h4>
 <hr />
-<form autocomplete="off">
+<form autocomplete="off" [formGroup]="form" (ngSubmit)="save()">
   <div>
     <div class="form-group row mb-2">
       <label class="col-2 col-form-label">Nombre</label>
       <div class="col-8">
-        <input class="form-control" type="text" placeholder="Nombre" />
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Nombre"
+          formControlName="name"
+          [class.is-invalid]="nameInvalid"
+        />
+        <small *ngIf="nameInvalid" class="text-danger">
+          El nombre es requerido
+        </small>
       </div>
     </div>
 
     <div class="form-group row mb-2">
       <label class="col-2 col-form-label">Apellido</label>
       <div class="col-8">
-        <input class="form-control" type="text" placeholder="Apellido" />
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Apellido"
+          formControlName="lastName"
+          [class.is-invalid]="lastNameInvalid"
+        />
+        <small *ngIf="lastNameInvalid" class="text-danger">
+          El apellido es requerido
+        </small>
       </div>
     </div>
   </div>
@@ -24,6 +42,82 @@
         class="form-control"
         type="email"
         placeholder="Correo electrónico"
+        formControlName="email"
+        [class.is-invalid]="emailInvalid"
+      />
+      <small *ngIf="emailInvalid" class="text-danger">
+        Ingrese un correo valido
+      </small>
+    </div>
+  </div>
+
+  <div class="form-group row mb-2">
+    <label class="col-2 col-form-label">Usuario</label>
+    <div class="col-8">
+      <input
+        class="form-control"
+        type="email"
+        placeholder="Correo electrónico"
+        formControlName="user"
+        [class.is-invalid]="userInvalid"
+      />
+      <small *ngIf="userInvalid" class="text-danger">
+        Ese nombre de usuario ya fue tomado
+      </small>
+    </div>
+  </div>
+
+  <div class="form-group row mb-2" formGroupName="address">
+    <label class="col-2 col-form-label">Direccion</label>
+    <div class="row col-8">
+      <div class="col">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Calle"
+          formControlName="street"
+          [class.is-invalid]="streetInvalid"
+        />
+        <small *ngIf="streetInvalid" class="text-danger">
+          Calle es requerido
+        </small>
+      </div>
+      <div class="col">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Ciudad"
+          formControlName="city"
+          [class.is-invalid]="cityInvalid"
+        />
+        <small *ngIf="cityInvalid" class="text-danger">
+          Ciudad es requerido
+        </small>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row mb-2">
+    <label class="col-2 col-form-label">Contraseña</label>
+    <div class="col-8">
+      <input
+        class="form-control"
+        type="password"
+        placeholder="Contraseña"
+        formControlName="password"
+      />
+    </div>
+  </div>
+
+  <div class="form-group row mb-2">
+    <label class="col-2 col-form-label">Repita Contraseña</label>
+    <div class="col-8">
+      <input
+        class="form-control"
+        type="password"
+        placeholder="Contraseña"
+        formControlName="password1"
+        [class.is-invalid]="password1Invalid"
       />
     </div>
   </div>
@@ -37,3 +131,14 @@
     </div>
   </div>
 </form>
+
+<hr />
+<pre>
+  Estado del formulario {{ form.valid }}
+  <br>
+  Estatus: {{ form.status }}
+
+  <br>
+ 
+  Value:{{ form.value | json }}
+</pre>
